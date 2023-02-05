@@ -1,2 +1,8 @@
-printfn "Hello 1!"
-printfn "Hello 2!"
+let addtoself x  =
+    x+x
+
+let mutliplytoself x =
+    x*x
+
+let integer = 10
+integer |>  addtoself |> mutliplytoself |> printfn "%i"
