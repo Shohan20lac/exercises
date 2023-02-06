@@ -16,4 +16,17 @@ let rec simplePatternMatch x =
         printfn "inputval is not 10. Decreasing..."
         simplePatternMatch (x-10)
 
-simplePatternMatch 100
+let rec factorial x =
+    match x with
+    | 1 -> 1
+    | _ ->
+        x * factorial (x-1)
+
+let rec fib n=
+    match n with
+    |2 -> 2
+    |1 -> 1
+    |_ -> fib(n-1) + fib(n-2)
+
+// Generate a list containing the first 3 fibonacci numbers
+[1..4] |> Seq.map fib |> printfn "%A"
