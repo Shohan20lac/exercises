@@ -1,12 +1,5 @@
-let isEven x=
-    x%2=0
-
-//Project Euler Problem #2:
-//By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms
-//(Starting with 1 and 2).
-
-// Find sum of first ten numbers in the fibonacci sequence
-
+//Project Euler Problem #2: 
+// find the sum of the even-valued fibonacci numbers (Starting with 1 and 2) 
 
 // 1. Custom Pattern Matching
 let rec simplePatternMatch x =
@@ -15,6 +8,10 @@ let rec simplePatternMatch x =
     | _ -> 
         printfn "inputval is not 10. Decreasing..."
         simplePatternMatch (x-10)
+
+let isEven x=
+    if x%2=0 then x
+    else 0
 
 let rec factorial x =
     match x with
@@ -28,5 +25,10 @@ let rec fib n=
     |1 -> 1
     |_ -> fib(n-1) + fib(n-2)
 
-// Generate a list containing the first 3 fibonacci numbers
-[1..4] |> Seq.map fib |> printfn "%A"
+let stopWatch = System.Diagnostics.Stopwatch.StartNew()
+[1..31] |> Seq.map fib |> Seq.map isEven |> Seq.sum |> printfn "%A"
+stopWatch.Stop()
+printfn "%f ms" stopWatch.Elapsed.TotalMilliseconds
+
+
+
