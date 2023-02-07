@@ -18,6 +18,6 @@ let largestPrimeFactor (n: int32) =
     |> Seq.max
 
 let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-largestPrimeFactor(10098001) |> printfn "%i"
+largestPrimeFactor(1000) |> printfn "%i"
 stopWatch.Stop()
 printfn "%f ms" stopWatch.Elapsed.TotalMilliseconds
