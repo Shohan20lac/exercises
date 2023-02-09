@@ -1,7 +1,14 @@
-let isDivisibleby3or5 inputval =
-    inputval % 3 = 0
-        || inputval % 5 = 0
+let stopWatch = System.Diagnostics.Stopwatch.StartNew()
+let (ans:int) =
+    [1..1000]
+    |> Seq.filter (
+        fun x ->
+            x % 2 = 0  
+            && 
+            x % 5 = 0
+    ) 
+    |> Seq.sum
+stopWatch.Stop()
 
-let ans = [1..1000] |> Seq.filter isDivisibleby3or5 |> Seq.sum
-
-printfn $"{ans}"
+printfn $"Answer: {ans}"
+printfn $"Run time: {stopWatch.Elapsed.TotalMilliseconds}"
