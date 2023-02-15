@@ -18,13 +18,22 @@ let isPalindrome (v:string) =
         |> String.concat ""
     reversed = v
 
-let numbers1 = [100..999]
+let reverseString (v: string) =
+    v
+    |> Seq.rev 
+    |> Seq.map string
+    |> String.concat ""
 
 let result = 
-    numbers1
+    let minfactor = smallestNumber 3 |> reverseString |> int
+    let maxfactor = largestNumber 3 |> int
+    
+    let factorRange = [minfactor..maxfactor]
+    
+    factorRange
     |> Seq.map(
         fun number ->
-            Seq.allPairs (seq{number}) numbers1
+            Seq.allPairs (seq{number}) factorRange
         )
     |> Seq.collect (fun seq -> seq)
     |> Seq.map (
@@ -37,21 +46,4 @@ let result =
             |> isPalindrome
     )
     |> Seq.max
-
-let reverseString (v: string) =
-    v
-    |> Seq.rev 
-    |> Seq.map string
-    |> String.concat ""
-
-// Take n. Generate the smallest n-digit number.
-
-
-
-smallestNumber 3
-|> reverseString
-|> printfn "%s"
-
-largestNumber 3
-|> reverseString
-|> printfn "%s"
+    |> printfn "%i"

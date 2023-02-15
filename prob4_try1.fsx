@@ -5,12 +5,11 @@
 
 // let rec factorsStartingFrom (x: uint) (y: uint) (n: uint) :seq<uint * uint>=
 //     seq {
-
 //         if x < y then
 //             if n % x = (uint 0) then
 //                 yield x , (n/x)
 
-//             if x < n/(uint 2) then 
+//             if x < n/(uint 2) then
 //                 yield! factorsStartingFrom (x+(uint 1)) y n 
 //     }
 
