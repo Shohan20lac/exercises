@@ -1,8 +1,12 @@
-let rec factorialTail n  =
+let rec evenFactorialTail n accSum =
     if n <= 0 then
         printfn "Base Case reached"
+        printfn $"accSum: {accSum}"
     else
         printfn $"{n}"
-        factorialTail (n - 1) // Tail-recursive call
+        if n % 2 = 0 then
+            evenFactorialTail (n - 1) (accSum + n)
+        else
+            evenFactorialTail (n - 1) accSum
 
-factorialTail 2
+evenFactorialTail 10 0
