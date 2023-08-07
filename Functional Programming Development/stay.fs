@@ -1,3 +1,5 @@
+module stay
+
 type InPersonAssistance = {
     allDay:    bool
     overnight: bool
@@ -20,7 +22,7 @@ type AssistanceRequirement = {
 
 type PhysicalHealth =
 | FullyOperational
-| Unconvenienced   of Reason * Option<AssistanceRequirement>
+| Unconvenienced   of Reason * Option<AssistanceRequirement>    // TODO: Address
 | Injured          of Reason * AssistanceRequirement
 | SeverelyInjured  of Reason * AssistanceRequirement
 
@@ -32,18 +34,29 @@ type MentalHealth =
 | Depressed  of Reason
 | Suicidal   of Reason
 
+type PersonType =
+| Husband
+| Wife
+| HusbandsMother
+| HusbandsFather
+| WifesMother
+| WifesFather
 
-
-type Wife = {
+type Person = {
+    Name:           string
     PhysicalHealth: PhysicalHealth
     MentalHealth:   PhysicalHealth
+    PersonType:     PersonType
+}
+
+type Wife = {
+    CanAffordToNotBeEmotionallySupportedRightNow: bool
 }
 
 type Husband = {
-    PhysicalHealth: PhysicalHealth
-    MentalHealth:   PhysicalHealth
     CanAffordToNotCodeRightNow: bool
 }
+
 
 type Child =
 | Husband of Husband
@@ -74,4 +87,18 @@ type OccasionCategory =
 type Ocassion = {
     Name:     OcassionName
     Category: OccasionCategory
+}
+
+type AtHome = bool
+
+type StateOfExistence = 
+| InTown    of AtHome
+| OutofTown of AtHome
+| Abroad
+
+type ParentalStayArray = {
+    HusbandsMother: StateOfExistence
+    HusbandsFather: StateOfExistence
+    WifesMother:    StateOfExistence
+    WifesFather:    StateOfExistence
 }
