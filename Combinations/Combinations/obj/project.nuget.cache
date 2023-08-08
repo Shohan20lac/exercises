@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uCTzjU/Pa/1/JFvjct7+Lawns1jlQuTXffZ38oYiw8bCbABp7BJauxBNO0FwEOn4VA1yQOpW9jmUe1BGi5EtZQ==",
+  "success": true,
+  "projectFilePath": "C:\\dev\\exercises\\Combinations\\Combinations\\Combinations.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rshoh\\.nuget\\packages\\fsharp.core\\7.0.300\\fsharp.core.7.0.300.nupkg.sha512"
+  ],
+  "logs": []
+}
