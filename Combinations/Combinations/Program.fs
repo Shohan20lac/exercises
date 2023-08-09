@@ -5,21 +5,6 @@ open Assistance
 
 printfn "Hello World"
 
-let person1 = {
-    Name                     = "Shohan"
-    PersonType               = PersonType.Husband
-    PhysicalHealth           = PhysicalHealth.FullyOperational
-    MentalHealth             = MentalHealth.Bored "Just Because"
-    CompanionshipRequirement = {
-        Physical         = None
-        Emotional        = None
-        Medical          = None
-        Transportational = None
-    }
-}
-
-printfn $"{person1}"
-
 // TODO: 
 
 let NecessityLevels = [
@@ -38,10 +23,17 @@ let OccasionNames = [
     "RegularDay"
 ]
 
-let StatesOfExistance = [
+let statesOfExistance = [
     "InTown"
     "AtHome"
     "Abroad"
+]
+
+let parents = [
+    HusbandMom
+    HusbandDad
+    WifeMom
+    WifeDad
 ]
 
 let InPersonAssistances = [
@@ -77,3 +69,17 @@ let physicalHealthStates = [
     "SeverelyInjured"
 ]
 
+let availabilityStates = [
+    "Social"
+    "MultiTasking"
+    "Recluse"
+]
+
+
+let parentalStayState = {
+    HusbandMom = InTown true
+    HusbandDad = InTown true
+    WifeMom    = InTown true
+    WifeDad    = InTown true
+}
+    

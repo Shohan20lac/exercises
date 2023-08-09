@@ -11,18 +11,17 @@ type Transport =
 | Private
 | Public
 
-
 type AtHome           = bool
 type StateOfExistence =
 | InTown    of AtHome
 | OutofTown of AtHome
 | Abroad
 
-type ParentalStay = {
-    HusbandsMother: StateOfExistence
-    HusbandsFather: StateOfExistence
-    WifesMother:    StateOfExistence
-    WifesFather:    StateOfExistence
+type ParentalStayState = {
+    HusbandMom: StateOfExistence
+    HusbandDad: StateOfExistence
+    WifeMom:    StateOfExistence
+    WifeDad:    StateOfExistence
 }
 
 type InPersonAssistance = {
@@ -57,43 +56,64 @@ type PhysicalHealth =
 | Injured          of Reason * CompanionshipRequirement
 | SeverelyInjured  of Reason * CompanionshipRequirement
 
+type Duration = 
+| QuarterDay
+| HalfDay
+| WholeDay
+
+type Availability = 
+| Social
+| MultiTasking
+| Recluse
+
+type PersonState = {
+    PhysicalHealth: PhysicalHealth
+    MentalHealth:   MentalHealth
+    Availability:   Availability
+}
+
+type SonState = {
+    personState:              PersonState
+    daysSinceLastSeenParents: int
+    daysSinceLastBeenToHouse: int
+}
+
+type DaughterState = {
+    personState:              PersonState
+    daysSinceLastSeenMother:  int
+    daysSinceLastSeenFather:  int
+    daysSinceLastBeenHome:    int
+}
+
+type HusbandState = {
+    personState: PersonState
+    hoursSinceLastContactedWife: int
+    daysSinceLastSeenWife:       int
+}
+
+type WifeState = {
+    personState: PersonState
+    minutesSinceLastContactedHusband: int
+    hoursSinceLastSeenHusband:        int
+    CompanionshipRequirement:         CompanionshipRequirement
+}
+
+type ParentState = {
+    daysSinceLastSeenChild:      int
+    daysSinceLastSeenChildInLaw: int
+}
+
 
 type PersonType =
-| Husband
+| Husband     
 | Wife
-| HusbandsMother
-| HusbandsFather
-| WifesMother
-| WifesFather
+| HusbandMom
+| HusbandDad
+| WifeMom
+| WifeDad
 | Friend
 | FamilyMember
 | Other
-
-type Person = {
-    Name:                     string
-    PersonType:               PersonType
-    PhysicalHealth:           PhysicalHealth
-    MentalHealth:             MentalHealth
-    CompanionshipRequirement: CompanionshipRequirement
-}
-
-type Wife = {
-    CanAffordToBeWithoutWifeRightNow:   bool
-    CanAffordToBeWithoutMotherRightNow: bool
-}
-
-type Husband = {
-    CanAffordToNotCodeRightNow: bool
-}
-
-type Child =
-| Husband of Husband
-| Wife    of Wife
-
-type Parent = {
-    IsParentOf:     Option<Person>
-}
-
 
 type OccasionName = 
 | Birthday
@@ -105,6 +125,34 @@ type OccasionName =
 | RegularDay
 | Other of string
 
+type OccasionType = 
+| Social
+| Recreational
+| Religious
+| Emergency
+
+type OccasionScheduleNotice = 
+| Planned of int
+
+type OccasionState = {
+    ocassionName:               OccasionName
+    occasionType:               OccasionType
+    scheduleNotice:             OccasionScheduleNotice
+    husbandAttendanceNecessity: Necessity 
+    wifeAttendanceNecessity:    Necessity
+}
+
+type Scenario = {
+    husband:           PersonState   * SonState * HusbandState
+    husbandDad:        ParentState
+    husbandMom:        ParentState
+    wife:              DaughterState * WifeState
+    wifeMom:           ParentState
+    wifeDad:           ParentState
+    occasion:          OccasionState
+    parentalStayState: ParentalStayState
+}
+
 type OccasionCategory =
 | Cultural
 | Social
@@ -112,7 +160,7 @@ type OccasionCategory =
 | Recreational
 | Other
 
-type AttendanceRequirement = List<Person*Necessity>
+type AttendanceRequirement = List<string*Necessity>
 
 type Occasion = {
     Name:     OccasionName
