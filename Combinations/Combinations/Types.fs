@@ -80,8 +80,7 @@ type SonState = {
 
 type DaughterState = {
     personState:              PersonState
-    daysSinceLastSeenMother:  int
-    daysSinceLastSeenFather:  int
+    daysSinceLastSeenParents: int
     daysSinceLastBeenHome:    int
 }
 
@@ -99,6 +98,7 @@ type WifeState = {
 }
 
 type ParentState = {
+    personState:                 PersonState
     daysSinceLastSeenChild:      int
     daysSinceLastSeenChildInLaw: int
 }
@@ -132,13 +132,14 @@ type OccasionType =
 | Emergency
 
 type OccasionScheduleNotice = 
+| LastMinute
 | Planned of int
 
 type OccasionState = {
     ocassionName:               OccasionName
     occasionType:               OccasionType
     scheduleNotice:             OccasionScheduleNotice
-    husbandAttendanceNecessity: Necessity 
+    ttendanceNecessity: Necessity 
     wifeAttendanceNecessity:    Necessity
 }
 
@@ -146,7 +147,7 @@ type Scenario = {
     husband:           PersonState   * SonState * HusbandState
     husbandDad:        ParentState
     husbandMom:        ParentState
-    wife:              DaughterState * WifeState
+    wife:              PersonState   * DaughterState * WifeState
     wifeMom:           ParentState
     wifeDad:           ParentState
     occasion:          OccasionState
@@ -159,11 +160,3 @@ type OccasionCategory =
 | Religious
 | Recreational
 | Other
-
-type AttendanceRequirement = List<string*Necessity>
-
-type Occasion = {
-    Name:     OccasionName
-    Category: OccasionCategory
-    AttendanceRequirement: AttendanceRequirement
-}
