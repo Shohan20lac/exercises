@@ -11,7 +11,7 @@ struct Node {
 struct Node* head = NULL;
 struct Node* tail = NULL;
     
-void insert (int inval){
+void insertAtTail (int inval){
     std::cout << "Inserting " << inval << " to list...\n";
     Node* newNode = new Node;
     newNode -> data = inval;
@@ -20,7 +20,7 @@ void insert (int inval){
     if (head == NULL){
         std::cout << "List is empty\n";
         head = newNode;
-        tail = newNode;
+        
         
         newNode -> next = NULL;
         newNode -> prev = NULL;
@@ -33,7 +33,6 @@ void insert (int inval){
         std::cout << "List has only one element\n";
         
         head -> next = newNode;
-        tail = newNode;
         
         newNode -> prev = head;
         newNode -> next = NULL;
@@ -49,7 +48,10 @@ void insert (int inval){
             std::cout << ".\n";
             nodeIterator = nodeIterator -> next;
         }
+        nodeIterator -> next = newNode;
     }
+    
+    tail = newNode;
     
 }
 
@@ -73,13 +75,14 @@ void display() {
 
 
 int main() {
-    insert (10);
+    insertAtTail (10);
     display();
 
-    insert (1);
+    insertAtTail (1);
     display();
     
-    insert (3);
+    insertAtTail (3);
+    display();
 
     return 0;
 }
